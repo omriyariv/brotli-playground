@@ -1,10 +1,18 @@
-const compression = require('compression')
-const express = require('express')
+const devcert = require('devcert');
+const express = require('express');
+const https = require('https');
+
+let compression;
+if (process.env.NO_BR) {
+  compression = require('compression-no-br');
+} else {
+  compression = require('compression');
+}
 
 const PORT = 3000;
 const NUM_FLUSHES = 5;
 const FLUSH_INTERVAL = 1000;
-const BYTES_LENGTH = 1 * 1024; // 40kb, bug reproduces also for 100kb/500kb/1000kb
+const BYTES_LENGTH = 1 * 1024; // 1kb, bug reproduces also for 50kb/100kb/500kb/1000kb
 
 const app = express();
 const payload = Buffer.alloc(BYTES_LENGTH, '.');
@@ -40,7 +48,12 @@ app.get('/', function (req, res) {
 
   res.on('close', function () {
     clearInterval(timer);
-  })
-})
+  });
+});
 
-app.listen(PORT, () => console.log(`Example app listening on port ${PORT}!`));
+devcert.certificateFor('localhost').then(ssl => {
+  https.createServer(ssl, app).listen(PORT, () => {
+    console.log(`App listening on port ${PORT}!`);
+    console.log(`Brotli is ${process.env.NO_BR ? 'OFF' : 'ON'}`);
+  });
+});
