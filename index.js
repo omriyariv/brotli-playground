@@ -35,7 +35,7 @@ app.get('/', function (req, res) {
   res.write('<!DOCTYPE html><html><body>');
 
   // send response in phases
-  let timer = setInterval(function () {
+  const timer = setInterval(function () {
     res.write(`<div>${payload}</div>\n\n`);
     res.write(`<script>${inlineScript}</script>\n\n`);
     res.flush();
