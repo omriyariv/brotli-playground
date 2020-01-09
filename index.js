@@ -51,7 +51,7 @@ app.get('/', function (req, res) {
   });
 });
 
-devcert.certificateFor('localhost').then(ssl => {
+devcert.certificateFor('my-app.test').then(ssl => {
   https.createServer(ssl, app).listen(PORT, () => {
     console.log(`App listening on port ${PORT}!`);
     console.log(`Brotli is ${process.env.NO_BR ? 'OFF' : 'ON'}`);

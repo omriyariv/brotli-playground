@@ -6,7 +6,7 @@
   "dependencies": {
     "compression": "git+https://github.com/patrickmichalina/compression.git",
     "compression-no-br": "git+https://github.com/expressjs/compression.git",
-    "devcert": "^1.0.0",
+    "devcert": "^1.1.0",
     "express": "^4.17.1"
   },
   "scripts": {
