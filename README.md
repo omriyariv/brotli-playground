@@ -20,6 +20,6 @@ npm run no-br
 You will likely be prompted for password, this is necessary to setup SSL for localhost. Safari only accepts Brotli on HTTPS.
 ## Analyzing Results
 - Visit https://localhost:3000 using Safari.
-- With Brotli enabled, the browser dumps 5 lines at once. Opening the JS console confirms that all script tags executed at rougly the same time.
+- With Brotli enabled, the browser dumps 5 lines at once. Opening the JS console confirms that all script tags executed roughly at the same time.
 - With Brotli disabled, the broswer shows the HTML payload in chunks, since the server is configured to chunk 5 responses in 1 second intervals.
 - Testing on Chrome with Brotli enabled confirms chunked responses are incrementally shown on screen.
